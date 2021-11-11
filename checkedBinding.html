@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Checked Binding</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+
+</head>
+
+<body>  
+    <p>Login: <input type="text" data-bind="value: userName, valueUpdate: 'afterkeydown'"></p>
+    <p>Password: <input type="password" data-bind="value: userPassword"></p>
+    <p>Loggin in As : <span data-bind="text: userName"></span></p>
+    <script>
+        var viewModel = {
+           userName: ko.observable('marao'),
+           userPassword: ko.observable('loucura')
+        }
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+
+</html>
