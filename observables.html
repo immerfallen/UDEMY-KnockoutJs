@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: View Model</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+</head>
+<body>
+ <h1>Welcome <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span> </h1>
+ <label >First Name</label>
+ <input type="text" data-bind="value: firstName, valueUpdate: 'afterkeydown'">
+ <label >Last Name</label>
+ <input type="text" data-bind="value: lastName, valueUpdate: 'afterkeydown'">
+ <br><br>
+
+ <button>Change</button>
+    
+
+    <script>
+        var myViewModel = {
+            firstName: ko.observable("Maro"),
+            lastName: ko.observable("Melo")
+        };
+        $('button').click(function(){
+            myViewModel.firstName('Ricardo');
+            myViewModel.lastName('Bilu');
+        });
+
+        myViewModel.firstName.subscribe(function(newValue){
+            alert("The users first name is now "+newValue);
+        });
+
+        myViewModel.firstName.subscribe(function(oldValue){
+            alert("The users previous name was "+oldValue);
+        },null, "beforeChange");
+
+
+        ko.applyBindings(myViewModel);
+    </script>
+</body>
+</html>

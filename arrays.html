@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: View Model</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+</head>
+<body>    
+    <h1>User List</h1>
+    <ul data-bind="foreach: userArray1">
+        <li data-bind="text: $data"></li>
+    </ul>
+    <h1>Users table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: userArray2">
+            <tr>
+                <td data-bind="text: firstName"></td>
+                <td data-bind="text: lastName"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+       var userArray1 = ko.observableArray(['Edward', 'Jose', 'Sam']); 
+       var userArray2 = ko.observableArray([
+           {firstName: 'Maro', lastName: 'Jones'},
+           {firstName: 'Jose', lastName: 'Diaz'},
+           {firstName: 'Sam', lastName: 'Macondez'},
+        ])      
+       //userArray1.push('Jen');
+       //alert('There are '+userArray1().length+ ' Users in the array');
+       //alert(userArray1()[3]);
+       //alert(userArray2()[0].firstName);
+       ko.applyBindings();
+    </script>
+</body>
+</html>
