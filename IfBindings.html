@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: If Binding</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Employees</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: employees">
+            <tr data-bind="if: id">
+                <td data-bind="text: id"></td>
+                <td data-bind="text: name"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <body>
+        <h1>Fired Employees</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: employees">
+                <tr data-bind="ifnot: id">
+                    <td data-bind="text: id"></td>
+                    <td data-bind="text: name"></td>
+                </tr>
+            </tbody>
+        </table>
+    
+
+
+    <script>
+        var employees = ko.observableArray([
+            { id: "e100", name: "Maro Melo" },
+            { id: null , name: "Paulo Roberto" },
+            { id: "e102", name: "Joy Tenerinha" },
+        ]);        
+
+        ko.applyBindings();
+
+    </script>
+</body>
+
+</html>

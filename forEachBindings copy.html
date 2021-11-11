@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Foreach Binding</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Employees</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: employees">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: name"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h1>Costumers</h1>
+    <ul data-bind="foreach: costumers">
+        <li><span data-bind="text: $data"></span></li>
+    </ul>
+
+
+    <script>
+        var employees = ko.observableArray([
+            { id: "e100", name: "Maro Melo" },
+            { id: "e101", name: "Paulo Roberto" },
+            { id: "e102", name: "Joy Tenerinha" },
+        ]);
+
+        var costumers = ko.observableArray(["Maro", "Paulo", "Joana"]);
+
+        ko.applyBindings();
+
+    </script>
+</body>
+
+</html>
