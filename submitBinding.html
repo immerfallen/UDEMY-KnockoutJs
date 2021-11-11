@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example: Checked Binding</title>
+    <title>Example: Submit Binding</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
@@ -13,18 +13,18 @@
 </head>
 
 <body>  
-   <p>My checkbox <input type="checkbox" data-bind="checked: checkIt"></p>
-   <button data-bind="click: checkIt">Check the box</button>
+    <span data-bind="text: submitMessage"></span>
+    <form action="" data-bind="submit: fireSubmit">
+        <button type="submit">Submit</button>
+    </form>
     <script>
-       var viewModel = {
-           checkIt: ko.observable(false),
-            checkBox: function(){                
-                viewModel.checkIt(true);
-            }
-       }
-    
-       
-       ko.applyBindings(viewModel);
+        var viewModel = {
+           submitMessage: ko.observable(),
+           fireSubmit: function(){
+               this.submitMessage('Form submitted');
+           }
+        }
+        ko.applyBindings(viewModel);
     </script>
 </body>
 

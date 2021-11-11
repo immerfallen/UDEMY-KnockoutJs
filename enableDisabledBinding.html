@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example: Checked Binding</title>
+    <title>Example: Enabled Disabled Binding</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
@@ -13,18 +13,22 @@
 </head>
 
 <body>  
-   <p>My checkbox <input type="checkbox" data-bind="checked: checkIt"></p>
-   <button data-bind="click: checkIt">Check the box</button>
+    <p>
+        <input type="checkbox" data-bind="checked: isCompany">
+        Register Under a Company
+    </p>
+    <p>
+        Your name: <input type="text" data-bind="valu: name, disable: isCompany">
+    </p>
+    <p>
+        Company name: <input type="text" data-bind="valu: companyName, enable: isCompany">
+    </p>
     <script>
-       var viewModel = {
-           checkIt: ko.observable(false),
-            checkBox: function(){                
-                viewModel.checkIt(true);
-            }
-       }
-    
-       
-       ko.applyBindings(viewModel);
+        var viewModel = {
+          isCompany: ko.observable(false),
+          companyName: ''
+        }
+        ko.applyBindings(viewModel);
     </script>
 </body>
 
