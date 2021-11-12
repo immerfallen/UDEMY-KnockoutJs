@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Custom Binding</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+
+</head>
+
+<body>  
+   <h1 data-bind="changeColor: color">Change color example</h1>
+   <select data-bind="value: color">
+       <option value="black">Choose color</option>
+       <option value="red">Red</option>
+       <option value="blue">Blue</option>
+       <option value="green">Green</option>
+       <option value="yellow">Yellow</option>       
+   </select>
+    <script>
+        ko.bindingHandlers.changeColor={
+            update: function(element, valueAccessor){
+                var element = $(element);
+                var value = valueAccessor();
+                var valueUnwrapped = ko.unwrap(value);
+                element.css('color', valueUnwrapped);
+            }
+        }
+
+       var viewModel = {
+           color: ko.observable()
+       }
+       ko.applyBindings(viewModel);
+    </script>
+</body>
+
+</html>
