@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Custom Binding</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+
+</head>
+
+<body>
+   <ul data-bind="template: {name: 'categoryTemplate', foreach: categories, as: 'category'}"></ul>
+
+   <script type="text/html" id="categoryTemplate">
+       <li>
+           <strong data-bind="text: name"></strong>
+           <ul data-bind="template: {name: 'subcategoryTemplate', foreach: subcategories, as: 'subcategory'}"></ul>
+       </li>
+   </script>
+
+   <script type="text/html" id="subcategoryTemplate">
+    <li>
+        <a data-bind="attr: {href: subcategory}">
+            <span data-bind="text: subcategory"></span>
+        </a>
+       
+    </li>
+</script>
+
+
+    <script>       
+
+        var viewModel = {
+            categories: ko.observableArray([
+                {name: "Technology", subcategories: ['Programming', 'Hardware', 'Web development']},
+                {name: "Business", subcategories: ['Finance', 'Marketing', 'Stocks']},
+                {name: "Food", subcategories: ['Restaurant', 'Catering', 'Market']},
+                {name: "Construction", subcategories: ['Demolition', 'Carpentry', 'Electrical']},
+            ])
+        }
+        ko.applyBindings(viewModel);
+    </script>
+</body>
+
+</html>
