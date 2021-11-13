@@ -12,29 +12,78 @@
 
 </head>
 
-<body>  
-   <h1 data-bind="changeColor: color">Change color example</h1>
-   <select data-bind="value: color">
-       <option value="black">Choose color</option>
-       <option value="red">Red</option>
-       <option value="blue">Blue</option>
-       <option value="green">Green</option>
-       <option value="yellow">Yellow</option>       
-   </select>
+<body>
+    <h1 data-bind="changeColor: color">Change color example</h1>
+    <select data-bind="value: color">
+        <option value="black">Choose color</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+    </select>
+
+    <br>
+
+    <h1 data-bind="textFadeIn: msg">Text FadeIn Example</h1>
+    <input type="text" data-bind="value:msg">
+
+    <br>
+    <br>
+    <br>
+    <h1>Slide visible example</h1>
+
+    <div data-bind="slideVisible: giftWrap, slideDuration:600">You have selected the option</div>
+    <label><input type="checkbox" data-bind="checked: giftWrap" /> Gift wrap</label>
+
+
     <script>
-        ko.bindingHandlers.changeColor={
-            update: function(element, valueAccessor){
+        ko.bindingHandlers.changeColor = {
+            update: function (element, valueAccessor) {
                 var element = $(element);
                 var value = valueAccessor();
                 var valueUnwrapped = ko.unwrap(value);
                 element.css('color', valueUnwrapped);
             }
         }
+        ko.bindingHandlers.textFadeIn = {
+            update: function (element, valueAccessor) {
+                $(element).hide();
+                ko.bindingHandlers.text.update(element, valueAccessor);
+                $(element).fadeIn();
 
-       var viewModel = {
-           color: ko.observable()
-       }
-       ko.applyBindings(viewModel);
+            }
+        }
+
+        ko.bindingHandlers.slideVisible = {          
+                init: function (element, valueAccessor) {
+                    var value = ko.unwrap(valueAccessor()); // Get the current value of the current property we're bound to
+                    $(element).toggle(value); // jQuery will hide/show the element depending on whether "value" or true or false
+                            
+            },
+            update: function (element, valueAccessor, allBindings) {
+                // First get the latest data that we're bound to
+                var value = valueAccessor();
+
+                // Next, whether or not the supplied model property is observable, get its current value
+                var valueUnwrapped = ko.unwrap(value);
+
+                // Grab some more data from another binding property
+                var duration = allBindings.get('slideDuration') || 400; // 400ms is default duration unless otherwise specified
+
+                // Now manipulate the DOM element
+                if (valueUnwrapped == true)
+                    $(element).slideDown(duration); // Make the element visible
+                else
+                    $(element).slideUp(duration);   // Make the element invisible
+            }
+        };
+
+        var viewModel = {
+            color: ko.observable(),
+            msg: ko.observable("Text fadein example"),
+            giftWrap: ko.observable(false)
+        }
+        ko.applyBindings(viewModel);
     </script>
 </body>
 
