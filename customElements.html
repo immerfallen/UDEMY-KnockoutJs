@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Custom Element</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+    <script src="./undescore-ko.js"></script>
+
+</head>
+
+<body>
+    <newsletter-widget></newsletter-widget>
+   
+    <script>
+        ko.components.register('newsletter-widget', {
+            viewModel: function(){
+                this.email = ko.observable();
+                this.showMessage = ko.observable(false);
+
+                this.submitForm = function(){
+                    this.showMessage(true);
+                }
+            },
+            template: 
+            '<h3>Subscribe to our newsletter </h3>\
+            <form data-bind="submit: submitForm">\
+                <input data-bind="value: email">\
+                <button type="submit">Submit</button>\
+            </form>\
+            <p data-bind="visible: showMessage">Thanks for subscribing: <br><strong><span data-bind="text: email"></span></strong></p>'
+        });
+        ko.applyBindings();
+        
+    </script>
+</body>
+
+</html>
